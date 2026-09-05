@@ -7,6 +7,8 @@
   --muted: #5f5f59;
   --accent: #1a56c4;
   --border: #e2e2dd;
+  --moon: #f2d8a7;
+  --ink: #2a2622;
 
   --wrap: 42rem;
   --gap: clamp(1rem, 0.6rem + 1.6vw, 1.75rem);
@@ -28,6 +30,8 @@
     --muted: #a0a09a;
     --accent: #86b0ff;
     --border: #2e2e38;
+    --moon: #d8b26a;
+    --ink: #f0ece6;
   }
 }
 
@@ -205,4 +209,94 @@ pre code {
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* ---- Home: hero -------------------------------------------------------- */
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap);
+  margin-block-end: 0.5rem;
+}
+
+.hero__text {
+  flex: 1 1 18rem;
+}
+
+.hero h1 {
+  margin-block-start: 0;
+}
+
+.coyote {
+  flex: 0 0 auto;
+  width: clamp(9rem, 34vw, 13rem);
+  height: auto;
+  overflow: visible;
+}
+
+.coyote__moon {
+  fill: var(--moon);
+}
+
+.coyote__head {
+  fill: var(--ink);
+}
+
+/* Eye, nostril and mouth are knocked out of the silhouette. */
+.coyote__cut {
+  fill: var(--bg);
+}
+
+.coyote__mouth {
+  fill: none;
+  stroke: var(--bg);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* ---- Home: app cards --------------------------------------------------- */
+
+.apps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--gap);
+  list-style: none;
+  margin: 0 0 2em;
+  padding: 0;
+}
+
+.app {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: var(--gap);
+}
+
+.app__badge {
+  display: inline-block;
+  margin: 0 0 0.75em;
+  padding: 0.15em 0.6em;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.app__name {
+  margin-block: 0 0.35em;
+  font-size: var(--step-1);
+}
+
+.app__desc {
+  margin: 0;
+  color: var(--muted);
+}
+
+.note {
+  color: var(--muted);
 }

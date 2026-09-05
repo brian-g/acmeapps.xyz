@@ -31,6 +31,34 @@ syntax highlighting, `@11ty/eleventy-navigation`. All additive against this base
 
 No git commit was made — left for you.
 
+## Home page: coyote + coming-soon apps (2026-09-05) — complete
+
+- [x] Rewrite `src/index.njk`: coyote hero, "Coming soon" list, contact line
+- [x] Coyote as inline SVG — no JS, no image asset, no extra request
+- [x] All styling added to `src/assets/css/main.css` (no inline `style=`, no `<style>`)
+- [x] New tokens `--moon` / `--ink` with light + dark values
+- [x] Verify: build exits 0, no unrendered `{{ }}` / `{% %}` in output
+- [x] Verify: zero `<script>` / `onclick` / `javascript:` in `_site/`
+- [x] Verify: rendered screenshots in light and dark mode
+
+### Review
+
+The coyote went through five iterations, each one rendered and looked at rather
+than assumed. A full seated body silhouette never resolved — legs vanished into
+the torso mass and the head read as a three-spike crown, confirmed with a
+colour-coded wireframe render. Switched to a head-in-profile mark against a full
+moon, which reads instantly at hero size and works as a logo later.
+
+No JavaScript anywhere. The two app cards are a plain `ul`; the "Coming soon"
+badge is CSS on a `p`. Silhouette colour comes from `--ink`, so it inverts to a
+pale coyote on dark backgrounds; the eye, nostril and mouth are knocked out with
+`--bg` and follow along.
+
+Deliberately not done: per-app detail pages, an email capture form (would need a
+backend), favicon/OG image. App descriptions are placeholder copy — replace them
+with real positioning when the apps firm up.
+
+
 ## Next
 
 - [ ] Decide the content model (app pages? blog?) and add collections
