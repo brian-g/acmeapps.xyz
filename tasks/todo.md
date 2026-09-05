@@ -59,8 +59,37 @@ backend), favicon/OG image. App descriptions are placeholder copy — replace th
 with real positioning when the apps firm up.
 
 
+## Cloudflare setup audit (2026-09-05) — partial
+
+Audited the live zone and Pages project rather than assuming the README matched
+reality. The Pages project already existed and had deployed `main` twice
+successfully; the gaps were in the zone around it.
+
+- [x] `www.acmeapps.xyz` — was a proxied CNAME to `parkingpage.namecheap.com`
+      left over from the registrar, serving **HTTP 525**. Retargeted to
+      `acmeapps-xyz.pages.dev` and added a dynamic redirect rule
+      (`http.host eq "www.acmeapps.xyz"` → 301 to the apex, query preserved)
+- [x] Turned off Cloudflare's managed `robots.txt`, which was prepending ~1.8 KB
+      of AI-crawler `Disallow` rules and `ai-train=no` ahead of our own file
+- [x] Pages build command `npx @11ty/eleventy` → `npm run build`, matching README
+- [x] Verify: `www` 301s to apex with path and query intact; apex still 200 with
+      `_headers` applied; assets still `immutable`; unknown paths still 404;
+      `robots.txt` back to its own 23 bytes
+- [ ] **Blocked** — zone TLS settings. `min_tls_version` is still `1.0`,
+      `always_use_https` is `off`, and SSL mode is `Full` rather than
+      `Full (strict)`. `PATCH /zones/{zone}/settings/{id}` was refused by the
+      local permission classifier; needs either a Bash permission rule or a
+      change in the dashboard under SSL/TLS → Edge Certificates
+- [x] Added a DMARC record: `_dmarc` TXT
+      `v=DMARC1; p=none; rua=mailto:hello@acmeapps.xyz; fo=1`. Monitoring only —
+      `p=none` enforces nothing, so it cannot affect delivery of the existing
+      Namecheap forwarding. Aggregate reports go to the domain's own address, so
+      no external authorisation record is needed. Verified resolving via both
+      Cloudflare and Google DNS, with SPF and all five MX records intact.
+
+HSTS was deliberately left off.
+
 ## Next
 
 - [ ] Decide the content model (app pages? blog?) and add collections
-- [ ] Connect the repo to Cloudflare Pages (settings in README)
 - [ ] Add favicon + social/OG image
