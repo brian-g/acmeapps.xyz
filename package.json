@@ -1,0 +1,16 @@
+{
+  "name": "acmeapps.xyz",
+  "version": "1.0.0",
+  "description": "acmeapps.xyz — built with Eleventy",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6"
+  }
+}

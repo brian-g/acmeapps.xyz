@@ -1,0 +1,23 @@
+---
+layout: base.njk
+title: Home
+---
+
+<h1>{{ site.title }}</h1>
+
+<p class="lead">{{ site.description }}</p>
+
+<p>
+  This is the starting point for {{ site.url | replace("https://", "") }}. The
+  scaffold is deliberately small: one layout, one stylesheet, one dependency.
+  Add pages as Markdown or Nunjucks files under <code>src/</code> and they show
+  up in the build.
+</p>
+
+<h2>Next steps</h2>
+
+<ul>
+  <li>Edit site metadata and navigation in <code>src/_data/site.js</code>.</li>
+  <li>Adjust the design tokens at the top of <code>src/assets/css/main.css</code>.</li>
+  <li>Add a page: drop a <code>.md</code> or <code>.njk</code> file in <code>src/</code>.</li>
+</ul>
