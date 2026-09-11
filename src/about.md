@@ -6,11 +6,9 @@ description: What Acme Apps is and who builds it.
 
 # About
 
-This page is Markdown, rendered through the same Nunjucks layout as everything
-else — which means site data works here too: **{{ site.title }}**.
+Acme Apps is just a former User Experience designer, retired, who wants to build great small apps and wants others to benefit from his coding.
 
-Front matter on each page sets `title` and an optional `description`; the layout
-falls back to the site-wide description when a page omits it.
+If you want to checkout more of his work, see [brian.glaeske.us](https://brian.glaeske.us).
 
 ## Contact
 
