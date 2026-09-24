@@ -3,15 +3,39 @@ layout: base.njk
 title: Home
 description: "Acme Apps — small, focused apps that do one thing well. Cyclometer and RADAR.speed are coming soon."
 ---
-
 <section class="hero">
-  <svg class="coyote" viewBox="0 0 200 188" role="img" aria-labelledby="coyote-title">
+  <svg
+    class="coyote"
+    viewBox="0 0 200 188"
+    role="img"
+    aria-labelledby="coyote-title">
     <title id="coyote-title">A coyote in profile against a full moon</title>
-    <circle class="coyote__moon" cx="120" cy="70" r="58"/>
-    <path class="coyote__head" d="M 24 96 C 46 82, 68 70, 86 62 C 96 57, 102 50, 103 44 L 96 8 L 130 38 L 152 12 L 158 58 C 166 84, 164 110, 158 132 L 166 186 L 96 186 C 85 158, 77 138, 73 122 C 60 122, 44 116, 32 108 C 26 106, 22 102, 24 96 Z"/>
-    <circle class="coyote__cut" cx="112" cy="68" r="4.5"/>
-    <circle class="coyote__cut" cx="34" cy="99" r="2.5"/>
-    <path class="coyote__mouth" d="M 29 106 C 39 111, 47 113, 55 114"/>
+    <circle
+      class="coyote__moon"
+      cx="120"
+      cy="70"
+      r="58"
+    />
+    <path
+      class="coyote__head"
+      d="M 24 96 C 46 82, 68 70, 86 62 C 96 57, 102 50, 103 44 L 96 8 L 130 38 L 152 12 L 158 58 C 166 84, 164 110, 158 132 L 166 186 L 96 186 C 85 158, 77 138, 73 122 C 60 122, 44 116, 32 108 C 26 106, 22 102, 24 96 Z"
+    />
+    <circle
+      class="coyote__cut"
+      cx="112"
+      cy="68"
+      r="4.5"
+    />
+    <circle
+      class="coyote__cut"
+      cx="34"
+      cy="99"
+      r="2.5"
+    />
+    <path
+      class="coyote__mouth"
+      d="M 29 106 C 39 111, 47 113, 55 114"
+    />
   </svg>
 
   <div class="hero__text">
@@ -27,17 +51,18 @@ description: "Acme Apps — small, focused apps that do one thing well. Cyclomet
 <h2>Coming soon</h2>
 
 <ul class="apps">
-  <li class="app">
-    <p class="app__badge">Coming soon</p>
-    <h3 class="app__name">Cyclometer</h3>
-    <p class="app__desc">
-      A cycling computer that stays out of the way. Speed, distance, and
-      elevation, recorded cleanly and kept on your device. Also, there is no app
-      login. Use the services you already love like Strava and Ride with GPS with ease. 
-
-      Pricing at $10. Not a subscription, forever!
-    </p>
-  </li>
+  <a href="https://cyclometer.app/">
+    <li class="app">
+      <p class="app__badge">Coming soon</p>
+      <h3 class="app__name">Cyclometer</h3>
+      <p class="app__desc">
+        A cycling computer that stays out of the way. Speed, distance, and
+        elevation, recorded cleanly and kept on your device. Also, there is no
+        app login. Use the services you already love like Strava and Ride with
+        GPS with ease. Pricing at $10. Not a subscription, forever!
+      </p>
+    </li>
+  </a>
 
   <li class="app">
     <p class="app__badge">Coming soon</p>
@@ -52,7 +77,7 @@ description: "Acme Apps — small, focused apps that do one thing well. Cyclomet
     <h3 class="app__name">DockClockX</h3>
     <p class="app__desc">
       Why doesn't your Mac have nice visual clock to look at? In the past,
-      NeXTStep displayed the time in the dock, this app let's your Mac do the 
+      NeXTStep displayed the time in the dock, this app let's your Mac do the
       same.
     </p>
   </li>
