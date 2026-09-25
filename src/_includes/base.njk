@@ -6,6 +6,9 @@
     <title>{% if title %}{{ title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description" content="{{ description or site.description }}">
     <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="stylesheet" href="/assets/css/main.css">
   </head>
   <body>
@@ -14,8 +17,7 @@
     <header class="site-header">
       <div class="wrap site-header__inner">
         <a class="site-title" href="/">
-          {% include "coyote.njk" %}
-          <span>{{ site.title }}</span>
+          {% include "wordmark.njk" %}
         </a>
         <nav aria-label="Main">
           <ul class="nav">

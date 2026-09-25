@@ -120,3 +120,24 @@ HSTS was deliberately left off.
 - Screenshots: headless Firefox fails in the sandbox (no framebuffer), so a
   small WKWebView snapshot script (in the scratchpad, not the repo) captured
   1440/820/390 widths in light and dark.
+
+## New logo: wordmark header + app icon favicon (2026-09-25) — complete
+
+- [x] Export "Wordmark / Primary" and "App Icon / Ink 512" frames from `assets/ACME Apps Logo.sketch` via sketchtool
+- [x] `src/_includes/wordmark.njk` — inline SVG of the full 934×412 frame (clear space kept), ink as `currentColor`, red fixed
+- [x] Header uses the wordmark; `--brand-ink` token (#1a1446 light, #ecebe7 dark)
+- [x] Frame sized 3.25rem with negative block margin so clear space replaces header padding — header height unchanged
+- [x] `favicon.svg`, `favicon.ico` (16+32), `apple-touch-icon.png` (180, square, no rounded corners) in `src/public`
+- [x] Removed the coyote mark (`coyote.njk`, `.coyote*` CSS, `--moon`/`--ink`) — header was its only use
+- [x] Verify: build exits 0; WKWebView snapshots light/dark at 1100px and 360px; header height matches main
+
+## Review
+
+"ACME" caps render ~28px tall vs ~30px for the old coyote. The "APPS" line is ~3px
+tall at header size — legible only as texture. A header-specific lockup would fix that.
+
+## Hero: full logo in white (2026-09-25) — complete
+
+- [x] Hero `<h1>` renders `wordmark.njk` (white via `currentColor`; red kept); accessible name stays "Acme Apps"
+- [x] Width `clamp(12rem, …, 19.2rem)` (80% of first pass); left clear space pulled into the gutter so the "A" aligns with the text
+- [x] Verify: build exits 0; snapshots at 1100px light and 360px dark

@@ -10,8 +10,7 @@
   --accent: rgb(252, 0, 15);
   --accent-contrast: #ffffff;
   --border: #e7e3da;
-  --moon: #f2d8a7;
-  --ink: #2a2622;
+  --brand-ink: #1a1446;
   --header-bg: rgb(251 250 247 / 0.78);
   --shadow: 0 1px 2px rgb(40 30 20 / 0.06), 0 8px 24px -12px rgb(40 30 20 / 0.18);
   --shadow-hover: 0 2px 4px rgb(40 30 20 / 0.08), 0 18px 40px -16px rgb(40 30 20 / 0.3);
@@ -39,8 +38,7 @@
     --accent: rgb(252, 0, 15);
     --accent-contrast: #1a1208;
     --border: #2c2c32;
-    --moon: #d8b26a;
-    --ink: #f0ece6;
+    --brand-ink: #ecebe7;
     --header-bg: rgb(18 18 20 / 0.72);
     --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
     --shadow-hover: 0 2px 4px rgb(0 0 0 / 0.4), 0 18px 40px -16px rgb(0 0 0 / 0.8);
@@ -216,17 +214,16 @@ pre code {
 
 .site-title {
   display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  color: var(--text);
-  text-decoration: none;
+  color: var(--brand-ink);
 }
 
-.site-title .coyote {
-  width: 2rem;
-  height: auto;
+/* The frame includes the logo's clear space, so it stands in for the
+   header's vertical padding rather than sitting inside it. */
+.site-title .wordmark {
+  display: block;
+  height: 3.25rem;
+  width: auto;
+  margin-block: -0.625rem;
 }
 
 .nav {
@@ -295,32 +292,6 @@ img {
   height: auto;
 }
 
-/* ---- Coyote mark ------------------------------------------------------- */
-
-.coyote {
-  overflow: visible;
-}
-
-.coyote__moon {
-  fill: var(--moon);
-}
-
-.coyote__head {
-  fill: var(--ink);
-}
-
-/* Eye, nostril and mouth are knocked out of the silhouette. */
-.coyote__cut {
-  fill: var(--bg);
-}
-
-.coyote__mouth {
-  fill: none;
-  stroke: var(--bg);
-  stroke-width: 2;
-  stroke-linecap: round;
-}
-
 /* ---- Home: hero -------------------------------------------------------- */
 
 .hero {
@@ -373,8 +344,18 @@ img {
 }
 
 .hero h1 {
-  margin: 0 0 0.2em;
-  text-shadow: 0 2px 24px rgb(0 0 0 / 0.35);
+  margin: 0;
+}
+
+/* Pull the frame's left clear space (62.8 of 934 units) into the gutter so
+   the "A" lines up with the text below. */
+.hero .wordmark {
+  --w: clamp(12rem, 8.8rem + 11.2vw, 19.2rem);
+  display: block;
+  width: var(--w);
+  height: auto;
+  margin-inline-start: calc(var(--w) * -62.8 / 934);
+  filter: drop-shadow(0 2px 24px rgb(0 0 0 / 0.35));
 }
 
 .hero .lead {
