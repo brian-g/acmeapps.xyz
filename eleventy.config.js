@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 export default function (eleventyConfig) {
   // Site root files (_headers, robots.txt, favicons) live in src/public
@@ -11,9 +11,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("src/assets/css/");
 
   // Appends a content hash to an asset URL so long-cached files bust on change.
+  // Root URLs may come from src/public (see passthrough above).
   eleventyConfig.addFilter("versioned", (url) => {
+    const source = [`src${url}`, `src/public${url}`].find(existsSync);
+    if (!source) throw new Error(`versioned: no source file for ${url}`);
     const hash = createHash("sha256")
-      .update(readFileSync(`src${url}`))
+      .update(readFileSync(source))
       .digest("hex")
       .slice(0, 10);
     return `${url}?v=${hash}`;
