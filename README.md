@@ -22,7 +22,9 @@ eleventy.config.js        Eleventy config (ESM)
 src/
   _data/site.js           Site metadata + nav — edit this first
   _includes/base.njk      The single page layout
+  _includes/coyote.njk    Coyote-and-moon logo mark (header)
   assets/css/main.css     All styling; design tokens at the top
+  assets/img/             Hero photo (WebP) and app icons
   public/                 Copied to the site root (_headers, robots.txt)
   index.njk               Home
   about.md                Markdown page example

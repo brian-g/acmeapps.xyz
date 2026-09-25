@@ -20,3 +20,7 @@ _No corrections recorded yet._
 
 - Node is installed via Homebrew at `/opt/homebrew/bin`. If `node` is not found
   in a fresh shell, `export PATH="/opt/homebrew/bin:$PATH"` first.
+- Headless Firefox cannot render inside the Claude Code sandbox, even with the
+  sandbox disabled, and leaves hung processes that lock the profile. For page
+  screenshots, compile a small WKWebView snapshot script with `swiftc`. It works
+  and can force light or dark appearance.

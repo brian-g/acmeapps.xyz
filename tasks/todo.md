@@ -93,3 +93,30 @@ HSTS was deliberately left off.
 
 - [ ] Decide the content model (app pages? blog?) and add collections
 - [ ] Add favicon + social/OG image
+
+## Modernize home page (2026-09-24) — complete
+
+- [x] Hero: full-bleed coyote photo (Unsplash, Joshua Wilking) with overlay text;
+      WebP + JPEG at 1200/2400w via `<picture>`, credit in footer
+- [x] Layout: widen `--wrap` 42rem → ~72rem; keep prose pages at a readable measure
+- [x] Apps grid: `auto-fill, minmax(18rem, 1fr)` → 1/2/3 columns by width
+- [x] Fix invalid markup: `<a>` directly inside `<ul>` around Cyclometer card
+- [x] Icons: Cyclometer (its favicon.svg), DockClockX (BlackClock512.png → WebP),
+      new RADAR.speed SVG icon
+- [x] Move SVG coyote-moon mark into the header as the logo
+- [x] Verify: build, markup check, Firefox screenshots at desktop/tablet/phone, light+dark
+
+### Review
+
+- `.page` is now a named-column grid (`full` / `content`), so the hero bleeds
+  edge to edge without `100vw` overflow tricks; running text in plain pages is
+  still capped at `--measure` (42rem).
+- Hero is WebP only (1200w 87 KB, 2400w 235 KB), from the 6000px original.
+  Every current browser supports WebP, so no JPEG fallback was kept.
+- Only Cyclometer links out, so only its card is clickable as a whole
+  (stretched `::after`) and lifts on hover.
+- Fixed copy typos while moving markup: "spped", "let's", "NeXTStep",
+  "have nice visual clock".
+- Screenshots: headless Firefox fails in the sandbox (no framebuffer), so a
+  small WKWebView snapshot script (in the scratchpad, not the repo) captured
+  1440/820/390 widths in light and dark.
