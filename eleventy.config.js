@@ -1,3 +1,6 @@
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+
 export default function (eleventyConfig) {
   // Site root files (_headers, robots.txt, favicons) live in src/public
   // and are copied to the top of _site.
@@ -6,6 +9,15 @@ export default function (eleventyConfig) {
   // CSS ships as-is — no build step.
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addWatchTarget("src/assets/css/");
+
+  // Appends a content hash to an asset URL so long-cached files bust on change.
+  eleventyConfig.addFilter("versioned", (url) => {
+    const hash = createHash("sha256")
+      .update(readFileSync(`src${url}`))
+      .digest("hex")
+      .slice(0, 10);
+    return `${url}?v=${hash}`;
+  });
 
   eleventyConfig.addFilter("readableDate", (value) => {
     return new Intl.DateTimeFormat("en-US", {
