@@ -7,7 +7,7 @@
   --surface: #ffffff;
   --text: #1a1916;
   --muted: #5e5b54;
-  --accent: #b4521f;
+  --accent: rgb(252, 0, 15);
   --accent-contrast: #ffffff;
   --border: #e7e3da;
   --moon: #f2d8a7;
@@ -36,7 +36,7 @@
     --surface: #1b1b1f;
     --text: #ecebe7;
     --muted: #a3a09a;
-    --accent: #f0935c;
+    --accent: rgb(252, 0, 15);
     --accent-contrast: #1a1208;
     --border: #2c2c32;
     --moon: #d8b26a;
@@ -332,6 +332,7 @@ img {
   overflow: hidden;
   color: #fff;
   background: #6f7a80;
+  top: -50px;
 }
 
 .hero picture,
