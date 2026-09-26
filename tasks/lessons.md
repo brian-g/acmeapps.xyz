@@ -24,3 +24,9 @@ _No corrections recorded yet._
   sandbox disabled, and leaves hung processes that lock the profile. For page
   screenshots, compile a small WKWebView snapshot script with `swiftc`. It works
   and can force light or dark appearance.
+- WKWebView `takeSnapshot` does not render `backdrop-filter`. Content under a
+  frosted header looks crisp in snapshots even on known-good CSS — compare
+  against the original before calling it a regression.
+- `scroll-behavior: smooth` makes `window.scrollTo(0, y)` a no-op for a
+  snapshot; use `scrollTo({top: y, behavior: "instant"})`. Scroll-driven
+  animation values read in the same tick as the scroll are one frame stale.

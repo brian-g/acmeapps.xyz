@@ -19,6 +19,7 @@
   --measure: 42rem;
   --gap: clamp(1rem, 0.6rem + 1.6vw, 1.75rem);
   --radius: 18px;
+  --header-h: 3.75rem;
 
   --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -193,14 +194,39 @@ pre code {
 
 /* ---- Header / footer --------------------------------------------------- */
 
+/*
+ * How far the header has collapsed, iOS large-title style: 0 while the home
+ * hero's wordmark is in view (a clear bar over the photo), 1 once it has
+ * scrolled beneath the bar. Only the home page animates it (see the hero
+ * section); everywhere else it rests at 1, the solid bar.
+ */
+@property --collapse {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+@keyframes collapse {
+  from { --collapse: 0; }
+  to { --collapse: 1; }
+}
+
 .site-header {
+  /* The bar's material arrives early, as soon as the large title starts to
+     slide beneath it, and the ink turns from white to the page's colours
+     alongside it. */
+  --material: clamp(0, var(--collapse) * 2.5, 1);
+  --header-ink: color-mix(in srgb, #fff calc((1 - var(--material)) * 100%), var(--text));
+  --header-muted: color-mix(in srgb, rgb(255 255 255 / 0.88) calc((1 - var(--material)) * 100%), var(--muted));
+
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--header-bg);
-  -webkit-backdrop-filter: saturate(1.6) blur(14px);
-  backdrop-filter: saturate(1.6) blur(14px);
-  border-block-end: 1px solid var(--border);
+  background: color-mix(in srgb, var(--header-bg) calc(var(--material) * 100%), transparent);
+  -webkit-backdrop-filter: saturate(calc(1 + 0.6 * var(--material))) blur(calc(14px * var(--material)));
+  backdrop-filter: saturate(calc(1 + 0.6 * var(--material))) blur(calc(14px * var(--material)));
+  /* A shadow rather than a border, so the hairline adds no height. */
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) calc(var(--material) * 100%), transparent);
 }
 
 .site-header__inner {
@@ -209,12 +235,18 @@ pre code {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem 1.5rem;
-  padding-block: 0.75rem;
+  min-height: var(--header-h);
 }
 
+/* The small title arrives in the second half, once the large one is mostly
+   under the bar. */
 .site-title {
+  --reveal: clamp(0, var(--collapse) * 2 - 1, 1);
+
   display: inline-flex;
   color: var(--brand-ink);
+  opacity: var(--reveal);
+  translate: 0 calc((1 - var(--reveal)) * 0.5rem);
 }
 
 /* The frame includes the logo's clear space, so it stands in for the
@@ -238,20 +270,20 @@ pre code {
   display: block;
   padding: 0.35em 0.85em;
   border-radius: 999px;
-  color: var(--muted);
+  color: var(--header-muted);
   text-decoration: none;
   font-size: 0.95rem;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .nav a:hover {
-  color: var(--text);
-  background: color-mix(in srgb, var(--text) 7%, transparent);
+  color: var(--header-ink);
+  background: color-mix(in srgb, var(--header-ink) 7%, transparent);
 }
 
 .nav a[aria-current="page"] {
-  color: var(--text);
-  background: color-mix(in srgb, var(--text) 10%, transparent);
+  color: var(--header-ink);
+  background: color-mix(in srgb, var(--header-ink) 14%, transparent);
 }
 
 .site-footer {
@@ -300,10 +332,13 @@ img {
   display: grid;
   align-items: end;
   min-height: clamp(30rem, 82svh, 50rem);
-  overflow: hidden;
+  /* Start under the header, so the bar sits over the photo. */
+  margin-block-start: calc(-1 * var(--header-h));
+  /* clip, not hidden: hidden would make the hero a scroll container and
+     break the wordmark's view timeline below. */
+  overflow: clip;
   color: #fff;
   background: #6f7a80;
-  top: -50px;
 }
 
 .hero picture,
@@ -320,13 +355,15 @@ img {
   object-position: 44% 40%;
 }
 
-/* Darken the lower-left so white type holds up over bright gravel. */
+/* Darken the lower-left so white type holds up over bright gravel, and the
+   top edge so the clear header's white nav reads over the sky. */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
+    linear-gradient(to bottom, rgb(12 10 8 / 0.45), transparent calc(var(--header-h) * 2.5)),
     linear-gradient(to top, rgb(12 10 8 / 0.82) 0%, rgb(12 10 8 / 0.45) 38%, transparent 70%),
     linear-gradient(to right, rgb(12 10 8 / 0.45), transparent 60%);
 }
@@ -356,6 +393,29 @@ img {
   height: auto;
   margin-inline-start: calc(var(--w) * -62.8 / 934);
   filter: drop-shadow(0 2px 24px rgb(0 0 0 / 0.35));
+}
+
+/*
+ * Large title → small title. The wordmark's view timeline, inset by the
+ * header, covers exactly the stretch where it slides under the bar; the
+ * header runs --collapse along it. Browsers without scroll-driven animations
+ * keep the solid bar.
+ */
+@supports (animation-timeline: view()) and (timeline-scope: none) {
+  body:has(.hero h1) {
+    timeline-scope: --hero-title;
+  }
+
+  .hero h1 {
+    view-timeline: --hero-title block;
+    view-timeline-inset: var(--header-h) 0;
+  }
+
+  body:has(.hero h1) .site-header {
+    animation: collapse linear both;
+    animation-timeline: --hero-title;
+    animation-range: exit 0% exit 100%;
+  }
 }
 
 .hero .lead {
