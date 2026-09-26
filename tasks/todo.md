@@ -141,3 +141,31 @@ tall at header size — legible only as texture. A header-specific lockup would 
 - [x] Hero `<h1>` renders `wordmark.njk` (white via `currentColor`; red kept); accessible name stays "Acme Apps"
 - [x] Width `clamp(12rem, …, 19.2rem)` (80% of first pass); left clear space pulled into the gutter so the "A" aligns with the text
 - [x] Verify: build exits 0; snapshots at 1100px light and 360px dark
+
+## Home: iOS large-title header (2026-09-26) — complete
+
+- [x] Clear header over the hero at scroll 0: no material, no wordmark, white nav
+- [x] Registered `--collapse` (0→1) driven by the hero wordmark's view timeline,
+      inset by the header so it tracks the logo sliding *under the bar*
+- [x] Bar material and nav ink arrive in the first 40% of the slide; small
+      wordmark fades/rises in over the second half
+- [x] Replace `.hero { top: -50px }` with `margin-block-start: -var(--header-h)`
+      (the old offset fell ~10px short, leaving a cream strip above the photo)
+- [x] `.hero` `overflow: hidden` → `clip` so it isn't a scroll container
+- [x] Top scrim on the hero so white nav reads over the bright sky
+- [x] Verify: `--collapse` reads 0 until the logo reaches the bar, 1 one logo-height
+      later; screenshots at 390 and 1280 wide, light and dark; About page unchanged
+- [x] Verify: still zero `<script>` in `_site/index.html`
+
+### Review
+
+Pure CSS (scroll-driven animations + `timeline-scope`), gated by `@supports`.
+Browsers without support — and every page other than home — rest at
+`--collapse: 1`, the original solid bar. The header border became a 1px
+`box-shadow` so the bar height is exactly `--header-h`.
+
+Side effect: removing the `top: -50px` hack also removes the ~50px of dead space
+it left under the hero, so "Coming soon" sits closer to the photo.
+
+Not verifiable here: `backdrop-filter` blur. WKWebView snapshots don't render it
+(checked against the untouched original CSS), so check the blur in real Safari.
