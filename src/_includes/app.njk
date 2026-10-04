@@ -1,0 +1,39 @@
+---
+layout: base.njk
+---
+{#- An app's landing page. `app` comes from the directory data file. -#}
+{% set intro %}
+  <img class="app__icon" src="{{ app.icon }}" width="72" height="72" alt="">
+  <h1 class="app-intro__name">{{ app.name }}</h1>
+  <p class="app-intro__subtitle">{{ app.subtitle }}</p>
+  <p class="lead">{{ app.tagline }}</p>
+  <p class="badge">Coming soon to the App Store</p>
+{% endset %}
+
+{% if app.photo %}
+<section class="hero hero--app hero--{{ page.fileSlug }} full-bleed">
+  <img
+    class="hero__img"
+    src="{{ app.photo.src }}-1200.webp"
+    srcset="{{ app.photo.src }}-1200.webp 1200w, {{ app.photo.src }}-2400.webp 2400w"
+    sizes="100vw"
+    width="{{ app.photo.width }}"
+    height="{{ app.photo.height }}"
+    alt="{{ app.photo.alt }}"
+    fetchpriority="high">
+
+  <div class="hero__inner">
+    <div class="hero__text app-intro">{{ intro | safe }}</div>
+  </div>
+
+  <p class="hero__credit">
+    Photo by <a href="{{ app.photo.url }}">{{ app.photo.credit }}</a> on Unsplash
+  </p>
+</section>
+{% else %}
+<header class="app-intro">{{ intro | safe }}</header>
+{% endif %}
+
+{{ content | safe }}
+
+<p class="app-privacy"><a href="{{ app.url }}privacy/">{{ app.name }} Privacy Policy</a></p>
