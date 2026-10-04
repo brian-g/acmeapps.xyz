@@ -1,0 +1,17 @@
+{
+  "app": {
+    "name": "Acme Radar",
+    "subtitle": "Traffic Speed Check",
+    "tagline": "Read the road behind you. Pair a Garmin Varia and see how fast traffic is really going.",
+    "icon": "/assets/img/radar.svg",
+    "url": "/radar/",
+    "photo": {
+      "src": "/assets/img/radar",
+      "width": 2400,
+      "height": 1600,
+      "alt": "A classic car drives straight toward the camera on a country road through green hills",
+      "credit": "Jeremy Bishop",
+      "url": "https://unsplash.com/photos/TcVXFVJpTWE"
+    }
+  }
+}

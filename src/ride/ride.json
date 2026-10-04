@@ -1,0 +1,17 @@
+{
+  "app": {
+    "name": "Acme Ride",
+    "subtitle": "Cycling Dashboard",
+    "tagline": "A bike computer for your iPhone — clear in the sun, private by design.",
+    "icon": "/assets/img/ride.svg",
+    "url": "/ride/",
+    "photo": {
+      "src": "/assets/img/ride",
+      "width": 2400,
+      "height": 1350,
+      "alt": "A cyclist rides a road bike around a bend in a forest road",
+      "credit": "Viktor Bystrov",
+      "url": "https://unsplash.com/photos/Gi0OMNguFaw"
+    }
+  }
+}

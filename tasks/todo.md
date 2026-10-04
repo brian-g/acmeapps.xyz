@@ -178,3 +178,53 @@ Not verifiable here: `backdrop-filter` blur. WKWebView snapshots don't render it
 
 No `<lastmod>`: Eleventy's default page date is file creation time, which a
 fresh CI clone resets, and Google ignores lastmod it finds inaccurate.
+
+## Acme Radar + Acme Ride app pages (2026-10-04) — complete
+
+Source for Ride: `CyclometerAI/docs/src` (`index.njk`, `privacy-policy/index.njk`,
+hero photo by Viktor Bystrov). Source for the Radar policy: `RADAR.Speed/docs/DESIGN.md`.
+
+- [x] Rename RADAR.speed → **Acme Radar** (home card, meta description, icon file `radar-speed.svg` → `radar.svg`)
+- [x] `src/radar/index.njk` → `/radar/` — icon, name, short pitch, "Coming soon", features (live speeds of approaching vehicles, per-vehicle peak, Varia RTL515/RCT715, not a legal radar gun)
+- [x] `src/radar/privacy.md` → `/radar/privacy/` — Bluetooth only, radar ID stored on device, no account, no network, no analytics
+- [x] `src/ride/index.njk` → `/ride/` — **Acme Ride**, subtitle "Cycling Dashboard"; port Cyclometer's two feature sections + photo (WebP, credited)
+- [x] `src/ride/privacy.md` → `/ride/privacy/` — Cyclometer policy text with the name changed
+- [x] Shared `app.njk` layout (icon, name, subtitle, badge, privacy link) + CSS in `main.css`
+- [x] Home: Cyclometer card → Acme Ride linking to `/ride/`; Radar card links to `/radar/`
+- [x] Verify: build exits 0, sitemap lists the 4 new URLs, no stray "Cyclometer"/"RADAR.speed" in `_site/`, snapshots light/dark at 390 + 1280
+
+### Review
+
+- App data lives in directory data files (`src/ride/ride.json`, `src/radar/radar.json`),
+  so each landing page and its privacy policy share one `app` object.
+- `app.njk` renders the full-bleed `.hero` when the app has a photo (Ride) and a
+  plain intro when it doesn't (Radar). Because Ride's hero has an `h1`, the home
+  page's large-title header collapse applies there too, with no extra CSS.
+- `.app__badge` split into `.badge` (the pill) and `.app__badge` (card positioning)
+  so the app pages can reuse the pill.
+- Ride photo is WebP re-encoded from Cyclometer's 2400w JPEG: 95 KB / 293 KB.
+- Ride policy is Cyclometer's text with the name swapped, plus a contact line.
+  Its "Last updated" date is still August 21, 2026. The Radar policy is new, drafted
+  from `RADAR.Speed/docs/DESIGN.md` and the app's code (CoreBluetooth only, no
+  network, location, or Health).
+- URLs are `/ride/` and `/radar/`, matching `/about/`; Cloudflare Pages redirects
+  `/radar` → `/radar/`.
+- Verified: build exits 0; sitemap lists all 4 new URLs and passes `xmllint`; no
+  "Cyclometer"/"RADAR.speed" left in `_site/`; no `<script>`; WKWebView snapshots of
+  Ride (1280 light, 390 dark), Radar (1280 dark), home cards, and Radar privacy.
+
+Follow-ups: the in-app policy in CyclometerAI still says "Cyclometer", and
+cyclometer.app is no longer linked from here.
+
+## Radar: hero photo (2026-10-04) — complete
+
+- [x] Unsplash photo by Jeremy Bishop (`TcVXFVJpTWE`, Unsplash License): a classic
+      car coming head-on down a country road, which is the radar's view of traffic
+- [x] Original 6000×4000 kept in `assets/jeremy-bishop.jpg`, like the coyote's
+- [x] `radar-1200.webp` (57 KB) / `radar-2400.webp` (191 KB)
+- [x] Photo width/height moved into the app data (Ride is 16:9, Radar 3:2);
+      hero gets `hero--{{ page.fileSlug }}` for a per-photo `object-position`
+- [x] Verify: build exits 0; snapshots at 1280 light and 390 dark; Ride unchanged
+
+On phones the title sits over the car. It stays readable because the car is dark
+and the scrim covers it. Ride has the same overlap with its rider.

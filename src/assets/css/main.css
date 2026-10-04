@@ -520,11 +520,9 @@ img {
   outline: none;
 }
 
-/* Pinned to the card's top-right corner, level with the icon. */
-.app__badge {
-  position: absolute;
-  inset-block-start: calc(var(--gap) * 1.1);
-  inset-inline-end: calc(var(--gap) * 1.1);
+.badge {
+  justify-self: start;
+  width: fit-content;
   margin: 0;
   padding: 0.2em 0.65em;
   border-radius: 999px;
@@ -534,6 +532,19 @@ img {
   font-weight: 650;
   letter-spacing: 0.07em;
   text-transform: uppercase;
+}
+
+/* Pinned to the card's top-right corner, level with the icon. */
+.app__badge {
+  position: absolute;
+  inset-block-start: calc(var(--gap) * 1.1);
+  inset-inline-end: calc(var(--gap) * 1.1);
+}
+
+.app__subtitle {
+  margin-block: -0.2em 0.6em;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .app__desc {
@@ -552,6 +563,123 @@ img {
 
 .note {
   color: var(--muted);
+}
+
+/* ---- App pages --------------------------------------------------------- */
+
+.app-intro {
+  display: grid;
+  justify-items: start;
+  max-width: 36rem;
+}
+
+.app-intro .app__icon {
+  margin-block-end: 1.25rem;
+}
+
+.app-intro__name {
+  margin: 0;
+}
+
+.app-intro__subtitle {
+  margin-block: 0.15em 0.75em;
+  font-size: var(--step-1);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.app-intro .lead {
+  margin-block-end: 1.25rem;
+}
+
+/* A shorter hero than home's: the page has more to say below it. */
+.hero--app {
+  min-height: clamp(28rem, 72svh, 42rem);
+}
+
+/* Keep each photo's subject in view on narrow screens. */
+.hero--ride .hero__img {
+  object-position: 70% 50%;
+}
+
+.hero--radar .hero__img {
+  object-position: 50% 60%;
+}
+
+.hero .app-intro__subtitle {
+  color: #fff;
+}
+
+.hero .badge {
+  background: rgb(255 255 255 / 0.18);
+  color: #fff;
+}
+
+.app-section {
+  padding-block-start: clamp(1.5rem, 1rem + 2vw, 3rem);
+}
+
+.eyebrow {
+  margin: 0 0 0.4em;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.app-section h2 {
+  margin-block-start: 0;
+  max-width: var(--measure);
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--gap) calc(var(--gap) * 1.5);
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+.features li {
+  border-block-start: 1px solid var(--border);
+  padding-block-start: 1rem;
+}
+
+.features h3 {
+  margin-block: 0 0.35em;
+  font-size: var(--step-0);
+}
+
+.features p {
+  margin: 0;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.app-privacy {
+  margin-block-start: clamp(2.5rem, 2rem + 2vw, 4rem);
+  font-size: 0.95rem;
+}
+
+/* ---- Privacy policies -------------------------------------------------- */
+
+.prose {
+  max-width: var(--measure);
+}
+
+.prose h1 {
+  font-size: var(--step-2);
+}
+
+.back {
+  font-size: 0.95rem;
+}
+
+.updated {
+  color: var(--muted);
+  font-size: 0.95rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

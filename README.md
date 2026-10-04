@@ -22,11 +22,14 @@ eleventy.config.js        Eleventy config (ESM)
 src/
   _data/site.js           Site metadata + nav — edit this first
   _includes/base.njk      The single page layout
-  _includes/coyote.njk    Coyote-and-moon logo mark (header)
+  _includes/wordmark.njk  Acme Apps wordmark (header + home hero)
+  _includes/app.njk       App landing page layout
+  _includes/privacy.njk   App privacy policy layout
   assets/css/main.css     All styling; design tokens at the top
   assets/img/             Hero photo (WebP) and app icons
   public/                 Copied to the site root (_headers, robots.txt)
   index.njk               Home
+  ride/, radar/           App pages + privacy policies; app data in <dir>.json
   about.md                Markdown page example
   404.njk                 Served automatically by Cloudflare Pages
 _site/                    Build output (gitignored)
