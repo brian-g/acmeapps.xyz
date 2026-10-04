@@ -169,3 +169,12 @@ it left under the hero, so "Coming soon" sits closer to the photo.
 
 Not verifiable here: `backdrop-filter` blur. WKWebView snapshots don't render it
 (checked against the untouched original CSS), so check the blur in real Safari.
+
+## Sitemap (2026-10-04) — complete
+
+- [x] `src/sitemap.njk` → `/sitemap.xml`, built from `collections.all`
+- [x] `robots.txt` — `Sitemap:` line pointing at the absolute URL
+- [x] Verify: build exits 0, `xmllint` validates, lists `/` and `/about/` only (404 excluded)
+
+No `<lastmod>`: Eleventy's default page date is file creation time, which a
+fresh CI clone resets, and Google ignores lastmod it finds inaccurate.
