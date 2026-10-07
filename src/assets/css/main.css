@@ -588,6 +588,12 @@ img {
   letter-spacing: -0.01em;
 }
 
+.app-intro__company {
+  text-transform: uppercase;
+  font-size: var(--step-0);
+  margin: 0 0 -12px 0;
+}
+
 .app-intro .lead {
   margin-block-end: 1.25rem;
 }

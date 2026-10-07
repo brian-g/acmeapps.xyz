@@ -4,6 +4,7 @@ layout: base.njk
 {#- An app's landing page. `app` comes from the directory data file. -#}
 {% set intro %}
   <img class="app__icon" src="{{ app.icon }}" width="72" height="72" alt="">
+  <h2 class="app-intro__company">{{ app.company }}</h2>
   <h1 class="app-intro__name">{{ app.name }}</h1>
   <p class="app-intro__subtitle">{{ app.subtitle }}</p>
   <p class="lead">{{ app.tagline }}</p>

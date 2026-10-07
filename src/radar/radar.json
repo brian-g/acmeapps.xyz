@@ -1,6 +1,7 @@
 {
   "app": {
-    "name": "Acme Radar",
+    "company": "Acme",
+    "name": "Radar",
     "subtitle": "Traffic Speed Check",
     "tagline": "Read the road behind you. Pair a Garmin Varia and see how fast traffic is really going.",
     "icon": "/assets/img/radar.svg",

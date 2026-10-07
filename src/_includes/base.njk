@@ -6,6 +6,7 @@
     <title>{% if title %}{{ title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description" content="{{ description or site.description }}">
     <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="alternative" href="{{ site.alternative }}{{ page.url }}">
     <link rel="icon" href="{{ '/favicon.ico' | versioned }}" sizes="32x32">
     <link rel="icon" href="{{ '/favicon.svg' | versioned }}" type="image/svg+xml">
     <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | versioned }}">
@@ -39,6 +40,8 @@
 
     <footer class="site-footer">
       <div class="wrap">
+        
+
         <p>&copy; {{ page.date | year }} {{ site.author.name }}</p>
       </div>
     </footer>
