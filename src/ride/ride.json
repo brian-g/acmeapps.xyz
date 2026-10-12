@@ -1,6 +1,7 @@
 {
   "app": {
-    "name": "Acme Ride",
+    "company": "Acme",
+    "name": "Ride",
     "subtitle": "Cycling Dashboard",
     "tagline": "A bike computer for your iPhone — clear in the sun, private by design.",
     "icon": "/assets/img/ride.svg",
