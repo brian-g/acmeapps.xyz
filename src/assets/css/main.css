@@ -685,6 +685,24 @@ img {
   font-size: 0.95rem;
 }
 
+/* ---- About ------------------------------------------------------------- */
+
+.headshot {
+  float: inline-end;
+  width: 10rem;
+  height: auto;
+  margin: 0.25rem 0 1rem 1.5rem;
+  border-radius: 50%;
+  shape-outside: circle();
+}
+
+@media (max-width: 30rem) {
+  .headshot {
+    width: 7.5rem;
+    margin-inline-start: 1rem;
+  }
+}
+
 .updated {
   color: var(--muted);
   font-size: 0.95rem;
