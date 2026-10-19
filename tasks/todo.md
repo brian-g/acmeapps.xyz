@@ -228,3 +228,13 @@ cyclometer.app is no longer linked from here.
 
 On phones the title sits over the car. It stays readable because the car is dark
 and the scrim covers it. Ride has the same overlap with its rider.
+
+## About page: headshot + copy (2026-10-19) — complete
+
+- [x] Headshot: original 1254² PNG (2.3 MB) kept in `assets/headshot.png`;
+      `headshot-320.webp` (9.5 KB) / `headshot-640.webp` (34 KB), shown at 10rem
+      (7.5rem on phones), circular, floated with `shape-outside: circle()`
+- [x] Copy rewritten in first person from brian.glaeske.us + LinkedIn (public
+      view only: location, patent, Startup Weekend; rest is behind login)
+- [x] Page wrapped in `<article class="prose">` so floats work (grid items don't wrap text)
+- [x] Verify: build exits 0, smoke.sh OK, snapshots at 1280 light and 390 dark
