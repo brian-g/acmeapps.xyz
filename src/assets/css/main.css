@@ -577,8 +577,10 @@ img {
   margin-block-end: 1.25rem;
 }
 
-.app-intro__name {
-  margin: 0;
+/* Tuck the name up under the company line. In the h1's own em, so the pull
+   scales with the space above its capitals as the type size changes. */
+.app-intro .app-intro__name {
+  margin: -0.17em 0 0;
 }
 
 .app-intro__subtitle {
@@ -591,7 +593,7 @@ img {
 .app-intro__company {
   text-transform: uppercase;
   font-size: var(--step-0);
-  margin: 0 0 -12px 0;
+  margin: 0;
 }
 
 .app-intro .lead {
