@@ -1,0 +1,32 @@
+---
+layout: base.njk
+title: Acme Ride Support
+titleSuffix: ""
+description: "Help for Acme Ride: pairing sensors, loading routes, customizing the dashboard, and how the app uses your Health and location data."
+---
+<header class="support-intro">
+  <p class="back"><a href="{{ app.url }}">&larr; {{ app.company }} {{ app.name }}</a></p>
+  <h1>{{ app.name }} Support</h1>
+  <p class="lead">Guides for setting up Acme Ride, riding with it, and understanding what it does with your data.</p>
+</header>
+
+{% for category in supportCategories %}
+<section class="app-section">
+  <h2>{{ category }}</h2>
+  <ul class="features">
+    {%- for article in collections.rideSupport %}
+      {%- if article.data.category == category %}
+    <li>
+      <h3><a href="{{ article.url }}">{{ article.data.title }}</a></h3>
+      <p>{{ article.data.description }}</p>
+    </li>
+      {%- endif %}
+    {%- endfor %}
+  </ul>
+</section>
+{% endfor %}
+
+<p class="app-privacy">
+  Can&rsquo;t find what you need? Email <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>.
+  See also the <a href="{{ app.url }}privacy/">{{ app.name }} Privacy Policy</a>.
+</p>

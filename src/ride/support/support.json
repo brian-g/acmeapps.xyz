@@ -1,0 +1,10 @@
+{
+  "layout": "support.njk",
+  "titleSuffix": "Acme Ride Support",
+  "supportCategories": [
+    "Getting started",
+    "Riding",
+    "Your data",
+    "Settings and troubleshooting"
+  ]
+}

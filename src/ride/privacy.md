@@ -2,12 +2,12 @@
 layout: privacy.njk
 title: Acme Ride Privacy Policy
 description: How Acme Ride handles your ride, location, health, and sensor data.
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 Acme Ride records your GPS route, heart rate, speed, cadence, and radar alerts during a ride. Your ride history, the routes you import, and GPX route files are stored only in Acme Ride's private storage on your device.
 
-Acme Ride asks for When In Use access to record your route, and Always access so an in-progress recording keeps running if you lock your phone or switch apps mid-ride. GPS stays off when you aren't recording. The one exception is the New Ride sheet: if you've already allowed location access and haven't chosen a route, it takes a single location fix to show your local weather.
+Acme Ride asks for While Using the App access to record your route. That's enough to keep an in-progress recording running if you lock your phone or switch apps mid-ride, so Acme Ride never asks for Always access. GPS stays off when you aren't recording, with two exceptions. If you've already allowed location access, the New Ride sheet takes a single location fix to show your local weather when you haven't chosen a route, and the Routes map takes one to center the map on you.
 
 Acme Ride reads your heart rate, resting heart rate, and date of birth from Apple Health to calculate your personal HR zones. It reads your weight and sex to estimate the calories each ride burns. It reads your existing workouts so it doesn't save a ride that your Apple Watch or another app has already recorded. When a ride ends, Acme Ride saves it to Apple Health as a cycling workout with its distance, calories, and route map, so it appears in the Fitness app and counts toward your Activity rings. You can review or revoke this access anytime in the Health app.
 
