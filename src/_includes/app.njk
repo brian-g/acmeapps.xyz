@@ -37,4 +37,7 @@ layout: base.njk
 
 {{ content | safe }}
 
-<p class="app-privacy"><a href="{{ app.url }}privacy/">{{ app.name }} Privacy Policy</a></p>
+<p class="app-privacy">
+  {%- if app.support %}<a href="{{ app.support }}">{{ app.name }} Support</a> · {% endif -%}
+  <a href="{{ app.url }}privacy/">{{ app.name }} Privacy Policy</a>
+</p>

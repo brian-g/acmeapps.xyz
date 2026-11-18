@@ -238,3 +238,43 @@ and the scrim covers it. Ride has the same overlap with its rider.
       view only: location, patent, Startup Weekend; rest is behind login)
 - [x] Page wrapped in `<article class="prose">` so floats work (grid items don't wrap text)
 - [x] Verify: build exits 0, smoke.sh OK, snapshots at 1280 light and 390 dark
+
+## Acme Ride support pages (2026-11-18) — complete
+
+Source: read-only review of `../CyclometerAI` (branch `fix/585-pairing-scan-connections`;
+its uncommitted pairing-scan change is deliberately not documented).
+
+- [x] `rideSupport` collection (glob, sorted by `order`) in `eleventy.config.js`
+- [x] `src/ride/support/support.json` (layout + category order), `support.njk` layout, hub `index.njk`
+- [x] 16 articles under `src/ride/support/` (text only; screenshots to be automated later)
+- [x] CSS: hub topic list, `.prose table`, step-list spacing
+- [x] Support link on the Ride landing page
+- [x] `ride/privacy.md`: Always → When In Use; `updated` 2026-11-18
+- [x] `ride/index.njk`: route copy → import-only
+- [x] `smoke.sh`: support routes + screenshots
+- [x] Verify: build, no unrendered tags, sitemap + xmllint, hub links resolve, smoke, snapshots light/dark
+
+### Review
+
+- Hub at `/ride/support/` groups the 16 articles by the categories in
+  `support.json`. The `rideSupport` collection is sorted by each article's `order`,
+  so adding an article is one new `.md` file.
+- `<title>` gains an optional `titleSuffix` (e.g. "Pair a sensor · Acme Ride Support · Acme Apps").
+- Every UI label was checked against the CyclometerAI source. Three claims were
+  corrected after checking the code:
+  - Turn alerts come only from GPX cues; the app has no turns derived from route shape.
+  - Speed returns to the sensor automatically after a GPS fallback.
+  - The Route Elevation widget shows your position on the profile.
+- Markdown headings have no `id`s (no markdown-it-anchor), so articles link to
+  pages, not sections.
+- Privacy policy: "Always" corrected to While Using the App. Also added the
+  one-off location read on the Routes map, which the policy didn't mention.
+- Verified:
+  - build exits 0, with no unrendered tags;
+  - no broken internal links across `_site`;
+  - sitemap lists all 17 URLs and passes `xmllint`;
+  - `smoke.sh` OK (now checks every article);
+  - snapshots of the hub (1280), the dashboard article (390, light and dark),
+    and the tables at 390.
+- Not verified: the Files app folder name ("On My iPhone → Acme Ride → Rides")
+  needs a device check.

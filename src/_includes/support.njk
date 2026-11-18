@@ -1,0 +1,14 @@
+---
+layout: base.njk
+---
+{#- An Acme Ride support article. `app` comes from src/ride/ride.json. -#}
+<article class="prose support">
+  <p class="back"><a href="{{ app.support }}">&larr; {{ app.name }} Support</a></p>
+  <h1>{{ title }}</h1>
+
+  {{ content | safe }}
+
+  <p class="support__contact">
+    Still need help? Email <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>.
+  </p>
+</article>

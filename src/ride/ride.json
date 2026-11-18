@@ -6,6 +6,7 @@
     "tagline": "A bike computer for your iPhone — clear in the sun, private by design.",
     "icon": "/assets/img/ride.svg",
     "url": "/ride/",
+    "support": "/ride/support/",
     "photo": {
       "src": "/assets/img/ride",
       "width": 2400,

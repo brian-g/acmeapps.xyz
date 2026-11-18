@@ -24,6 +24,9 @@ check() {
   [ "$code" = "$2" ] || fail=1
 }
 for p in / /about/ /ride/ /ride/privacy/ /radar/ /radar/privacy/; do check "$p" 200; done
+# Every Ride support article, so a new one is covered without editing this list.
+for f in src/ride/support/*.md; do check "/ride/support/$(basename "$f" .md)/" 200; done
+check /ride/support/ 200
 check /no-such-page/ 404
 
 if [ ! -x "$bin" ] || [ "$here/snap.swift" -nt "$bin" ]; then
@@ -36,6 +39,12 @@ for p in home:/ about:/about/ ride:/ride/ radar:/radar/; do
   "$bin" "$base$path" 1280 900 "$out/$name-desktop.png" || fail=1
 done
 "$bin" "$base/ride/" 390 844 "$out/ride-mobile-dark.png" dark || fail=1
+for p in support:/ride/support/ support-dashboard:/ride/support/customize-the-dashboard/; do
+  name=${p%%:*} path=${p#*:}
+  "$bin" "$base$path" 390 844 "$out/$name-mobile.png" || fail=1
+  "$bin" "$base$path" 1280 900 "$out/$name-desktop.png" || fail=1
+done
+"$bin" "$base/ride/support/customize-the-dashboard/" 390 844 "$out/support-dashboard-mobile-dark.png" dark || fail=1
 
 [ $fail = 0 ] && echo "smoke OK - screenshots in $out" || echo "smoke FAILED"
 exit $fail

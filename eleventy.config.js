@@ -22,6 +22,14 @@ export default function (eleventyConfig) {
     return `${url}?v=${hash}`;
   });
 
+  // Acme Ride support articles, in hub order. A glob rather than a tag, since a
+  // tag in the directory data would also land on the hub page itself.
+  eleventyConfig.addCollection("rideSupport", (collectionApi) =>
+    collectionApi
+      .getFilteredByGlob("src/ride/support/*.md")
+      .sort((a, b) => a.data.order - b.data.order),
+  );
+
   eleventyConfig.addFilter("readableDate", (value) => {
     return new Intl.DateTimeFormat("en-US", {
       dateStyle: "long",
