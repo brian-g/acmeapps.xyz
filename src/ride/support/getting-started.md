@@ -18,7 +18,11 @@ The Welcome screen lists four permissions. Tap each row to see the iOS prompt. A
 | **Bluetooth** | Connects to your heart rate strap, speed and cadence sensors, and radar. |
 | **HealthKit** | Sets your heart rate zones and saves each ride to Apple Health as a workout. |
 
-**Next** becomes available once Location, Motion and Fitness, and Bluetooth are allowed. HealthKit is optional. You can turn it on later in the Health app, but heart rate zones fall back to default values and rides aren't saved to Health until you do. See [How Acme Ride uses Apple Health data](/ride/support/apple-health/).
+**Next** becomes available once Location is allowed. The other three are optional:
+
+- **Motion and Fitness**: without it, elevation comes from GPS, which is less precise.
+- **Bluetooth**: without it, you can't pair sensors, and speed and distance come from GPS.
+- **HealthKit**: without it, heart rate zones fall back to default values and rides aren't saved to Health. You can turn it on later in the Health app. See [How Acme Ride uses Apple Health data](/ride/support/apple-health/).
 
 ### If you tapped "Don't Allow"
 
@@ -27,6 +31,8 @@ iOS shows each permission prompt only once. If you turned one down, tap the row 
 ## Step 2: Add sensors
 
 The **Add Sensors** screen lists Bluetooth sensors nearby. Tap **Pair** next to each one you want to use, then tap **Finish**. You can skip this step and pair sensors later in **Settings → Sensors**. See [Pair a sensor](/ride/support/pair-a-sensor/).
+
+If you didn't allow Bluetooth, the list shows **Bluetooth Not Allowed** instead of searching. Tap **Open Settings** to switch it on, then return to Acme Ride.
 
 If you close the app partway through setup, it picks up where you left off.
 
