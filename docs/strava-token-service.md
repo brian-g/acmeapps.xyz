@@ -57,7 +57,9 @@ always allowed.
 
 **Rate limiting.** One WAF rule (Security → WAF → Rate limiting rules): when *URI Path* starts with
 `/ride/api/strava/`, counted per IP, more than 20 requests in 10 seconds → Block for 10 seconds. A rider's app makes
-a handful of calls an hour. Strava's webhook calls come from Strava's servers and are a few per deauthorization.
+a handful of calls an hour. Strava's webhook calls come from Strava's servers and are a few per deauthorization. Cloudflare counts
+approximately across its edge, so the block can start a few requests past 20 (the 2026-11-24 check blocked the
+30th).
 
 ## Deploying
 
@@ -94,16 +96,16 @@ custom domain from outside with check-host.net.
 
 ## Rotating the secret
 
-Strava's docs don't describe regenerating a client secret or what happens to issued tokens when it changes.
-Unverified. If strava.com/settings/api offers a regenerate control:
+strava.com/settings/api has **Generate New Client Secret** beside the secret's **Show**.
 
-1. Regenerate the secret in Strava's settings.
+1. Click **Generate New Client Secret**.
 2. Update `STRAVA_CLIENT_SECRET` in Cloudflare (Production and Preview) and retry the latest deployment.
-3. Check: a `refresh` with a live refresh token answers `200`.
+3. Check: `scripts/strava-webhook.sh view` with the new secret lists the subscription, and a `token` call with a bogus
+   code answers `code invalid` (not `client_id invalid`).
 
-Between steps 1 and 2 every exchange, refresh and revoke fails. The app keeps its tokens and retries, so do the two
-steps back to back. If Strava's settings offer no regenerate control, ask Strava developer support. The webhook
-subscription is tied to the client id, not the secret.
+Between steps 1 and 2 every exchange, refresh and revoke fails, so do them back to back. The app keeps its tokens and
+retries. Unverified: Strava's docs don't say whether tokens issued before a new secret keep working. The webhook
+subscription is tied to the client id, so it should survive.
 
 ## Manual end-to-end check
 
