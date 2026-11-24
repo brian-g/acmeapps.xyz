@@ -74,25 +74,23 @@ npx wrangler pages dev _site      # http://localhost:8788, reads .dev.vars
 ## Webhook subscription (once per Strava app)
 
 Strava allows one subscription per app. Create it after the webhook is deployed to production: Strava validates the
-callback at once. Run these in a shell, entering values at the prompts:
+callback at once, from its own servers. `scripts/strava-webhook.sh` prompts for the client id and secret (and, for
+create, the verify token) and saves or echoes none of them:
 
 ```sh
-read -p "client id: " CID; read -s -p "client secret: " CSECRET; echo; read -s -p "verify token: " VERIFY; echo
-
-# Create. Answers {"id": …}
-curl -X POST https://www.strava.com/api/v3/push_subscriptions \
-  -F client_id="$CID" -F client_secret="$CSECRET" \
-  -F callback_url=https://acmeapps.xyz/ride/api/strava/webhook -F verify_token="$VERIFY"
-
-# View
-curl -G https://www.strava.com/api/v3/push_subscriptions -d client_id="$CID" -d client_secret="$CSECRET"
-
-# Delete (204). Needed before changing the callback URL
-curl -X DELETE "https://www.strava.com/api/v3/push_subscriptions/<id>?client_id=$CID&client_secret=$CSECRET"
+scripts/strava-webhook.sh create        # answers {"id": …}
+scripts/strava-webhook.sh view
+scripts/strava-webhook.sh delete <id>   # 204; needed before changing the callback URL
 ```
 
-`VERIFY` must equal the production `STRAVA_WEBHOOK_VERIFY_TOKEN`. To change the verify token, delete the subscription,
+The verify token must equal the production `STRAVA_WEBHOOK_VERIFY_TOKEN`. To change it, delete the subscription,
 update the variable, redeploy, and create it again.
+
+**Checking the live site from a network with an ISP filter.** Some ISP filters (Spectrum's Security Shield, run by
+CUJO) block `acmeapps.xyz`: `curl` fails with `tlsv1 alert protocol version` or `wrong version number`, and
+`curl http://acmeapps.xyz:443/` answers with a redirect to `block.charter-prod.hosted.cujo.io`. Safari may still load
+it through iCloud Private Relay. Test the production deployment at `acmeapps-xyz.pages.dev` instead, or check the
+custom domain from outside with check-host.net.
 
 ## Rotating the secret
 
