@@ -13,6 +13,7 @@ npm install     # once
 npm start       # dev server with live reload at http://localhost:8080
 npm run build   # production build into _site/
 npm run clean   # remove _site/
+npm test        # Strava token service tests (node:test)
 ```
 
 ## Structure
@@ -32,6 +33,10 @@ src/
   ride/, radar/           App pages + privacy policies; app data in <dir>.json
   about.md                Markdown page example
   404.njk                 Served automatically by Cloudflare Pages
+functions/ride/api/strava/ Strava token service (Pages Functions)
+lib/                      Code shared by functions/ (never routed)
+test/                     npm test
+docs/                     Service docs (not published)
 _site/                    Build output (gitignored)
 ```
 
@@ -46,6 +51,12 @@ title: Pricing
 
 Markdown files are processed through Nunjucks, so `{{ site.title }}` and other
 data work in `.md` as well as `.njk`.
+
+## Strava token service
+
+Acme Ride's Strava sign-in goes through `/ride/api/strava/` (token, refresh,
+revoke, webhook). Endpoints, secrets, deployment, the webhook subscription and
+secret rotation: [docs/strava-token-service.md](docs/strava-token-service.md).
 
 ## Deploying to Cloudflare Pages
 

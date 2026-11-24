@@ -17,3 +17,7 @@ node_modules/
 # Logs
 npm-debug.log*
 *.log
+
+# Wrangler local secrets and state
+.dev.vars
+.wrangler/
